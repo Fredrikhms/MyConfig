@@ -14,6 +14,7 @@
           pkgs.yq pkgs.jq pkgs.jid  # Json and YAML
           pkgs.dos2unix # Tools
           pkgs.nushell  # Better shell
+          pkgs.starship # Nicer shell env
           # pkgs.nixFlakes # Flakes (remember to update ~/.config/nix/nix.conf) # https://yuanwang.ca/posts/getting-started-with-flakes.html
           # any-nix-shell  
           # jetbrains.idea-community # idea-community 
