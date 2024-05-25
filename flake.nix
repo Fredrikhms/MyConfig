@@ -20,6 +20,7 @@
           # jetbrains.idea-community # idea-community 
           pkgs.zoxide # smarter cd command, inspired by z and autojump (needs setup with nu)
           pkgs.tmux # tmux + TmuxPackagManager  https://www.youtube.com/watch?v=DzNmUNvnB04
+          pkgs.devenv
           #direnv nix-direnv # https://tonyfinn.com/blog/nix-from-first-principles-flake-edition/nix-8-flakes-and-developer-environments/
         ];
         # Note that `shellHook` still uses bash syntax.
