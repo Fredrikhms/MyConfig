@@ -6,7 +6,7 @@
       pkgs = import nixpkgs { system = "x86_64-linux"; };
     in
     {
-      devShells.x86_64-linux.default = pkgs.mkShell {
+      packages.x86_64-linux.default = pkgs.mkShell {
         packages =  [
           pkgs.fish
           pkgs.helix pkgs.nano pkgs.neovim # Editor
@@ -25,9 +25,9 @@
         ];
         # Note that `shellHook` still uses bash syntax.
         # This starts fish, then exists the bash shell when fish exits.
-        shellHook = ''
-          fish && exit
-        '';
+        #shellHook = ''
+        #  fish && exit
+        #'';
       };
     };
 }
