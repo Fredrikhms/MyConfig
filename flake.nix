@@ -46,8 +46,8 @@
 		shellHook = ''
           zsh && exit
 		#  
-		#	any-nix-shell fish --info-right | source
-		#	starship init fish | source
+		#	any-nix-shell zsh --info-right | source /dev/stdin
+		#	eval "$(starship init zsh)"
 		#   eval "$(zoxide init zsh)"
 		#  
 		#  " 
