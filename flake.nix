@@ -9,6 +9,7 @@
       packages.x86_64-linux.default = pkgs.mkShell {
         packages =  [
           pkgs.fish
+          pkgs.git
           pkgs.helix pkgs.nano pkgs.neovim # Editor
           pkgs.nil  # Nix grammar
           pkgs.yq pkgs.jq pkgs.jid  # Json and YAML
@@ -22,12 +23,20 @@
           pkgs.tmux # tmux + TmuxPackagManager  https://www.youtube.com/watch?v=DzNmUNvnB04
           pkgs.devenv
           #direnv nix-direnv # https://tonyfinn.com/blog/nix-from-first-principles-flake-edition/nix-8-flakes-and-developer-environments/
+		  pkgs.any-nix-shell #
+		  pkgs.newsboat # RSS reader
         ];
         # Note that `shellHook` still uses bash syntax.
         # This starts fish, then exists the bash shell when fish exits.
-        #shellHook = ''
-        #  fish && exit
-        #'';
+        shellHook = ''
+          fish --init-command "
+		  
+			any-nix-shell fish --info-right | source
+			starship init fish | source
+			zoxide init fish | source
+		  
+		  " && exit
+        '';
       };
     };
 }
