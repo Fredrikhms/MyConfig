@@ -25,9 +25,8 @@
         modules = [
 		  nixos-wsl.nixosModules.default
           {
-		    nix.settings.experimental-features = "nix-command flakes";
+			imports = [./nixos/configuration.nix];
             wsl.enable = true;
-			system.stateVersion = "23.05";
           }
         ] ;
       };
