@@ -4,56 +4,57 @@
 
   outputs = { self, nixpkgs, nixvim }:
     let
-      pkgs = import nixpkgs { system = "x86_64-linux"; };   
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
     in
     let
       inherit pkgs nixvim;
       nvim = nixvim.legacyPackages.x86_64-linux.makeNixvim {
-          plugins.lsp.enable = true;
-          plugins.lazyvim.enable = true;
+        plugins.lsp.enable = true;
+        plugins.lazyvim.enable = true;
       };
     in
     {
-      systemPackages = [nvim];
+      systemPackages = [ nvim ];
       packages.x86_64-linux.default = pkgs.mkShell {
-        packages =  [
+        packages = [
           #Shells  
           pkgs.fish
           #pkgs.zsh
-          pkgs.nushell  
+          pkgs.nushell
 
           #Shell setup
           #pkgs.direnv pkgs.nix-direnv # https://tonyfinn.com/blog/nix-from-first-principles-flake-edition/nix-8-flakes-and-developer-environments/
-          pkgs.any-nix-shell 
+          pkgs.any-nix-shell
           pkgs.starship # Nicer shell env
-      
+
           # Shell tools
-          pkgs.tmux   # tmux + TmuxPackagManager  https://www.youtube.com/watch?v=DzNmUNvnB04
+          pkgs.tmux # tmux + TmuxPackagManager  https://www.youtube.com/watch?v=DzNmUNvnB04
           pkgs.tmuxinator # Tmux session handler
           pkgs.byobu # Tmux client wrapper?
           pkgs.zoxide # smarter cd command, inspired by z and autojump (needs setup with nu)
-          
+
           # Dev tools
           pkgs.git
-          pkgs.helix pkgs.nano # Editor
+          pkgs.helix
+          pkgs.nano # Editor
           nvim
-          pkgs.nil  # Nix grammar
+          pkgs.nil # Nix grammar
           pkgs.yq # Json query
-          pkgs.jq   # YAML query
-          pkgs.jid  
-          pkgs.dos2unix 
+          pkgs.jq # YAML query
+          pkgs.jid
+          pkgs.dos2unix
           pkgs.devenv
           pkgs.ripgrep
-      
+
           # Fun 
           pkgs.newsboat # RSS reader
-           
+
           #OLD
           # pkgs.nixFlakes # Flakes (remember to update ~/.config/nix/nix.conf) # https://yuanwang.ca/posts/getting-started-with-flakes.html
           # jetbrains.idea-community # idea-community 
         ];
-        
-        
+
+
         # This starts zsh.
         #shellHook = ''
         #   zsh && exit
@@ -64,8 +65,8 @@
         #  
         #  " 
         #    '';
-        
-    
+
+
         shellHook = ''
           fish --init-command "
             any-nix-shell fish --info-right | source
@@ -76,7 +77,6 @@
           " && exit
         '';
 
-     };
-  };
+      };
+    };
 }
-
