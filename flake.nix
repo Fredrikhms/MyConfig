@@ -1,11 +1,20 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  inputs.nixvim.url = "github:nix-community/nixvim";
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, nixvim }:
     let
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      pkgs = import nixpkgs { system = "x86_64-linux"; };   
+    in
+    let
+      inherit pkgs nixvim;
+      nvim = nixvim.legacyPackages.x86_64-linux.makeNixvim {
+          plugins.lsp.enable = true;
+          plugins.lazyvim.enable = true;
+      };
     in
     {
+      systemPackages = [nvim];
       packages.x86_64-linux.default = pkgs.mkShell {
         packages =  [
           #Shells  
@@ -26,13 +35,15 @@
           
           # Dev tools
           pkgs.git
-          pkgs.helix pkgs.nano pkgs.neovim # Editor
+          pkgs.helix pkgs.nano # Editor
+          nvim
           pkgs.nil  # Nix grammar
           pkgs.yq # Json query
           pkgs.jq   # YAML query
           pkgs.jid  
           pkgs.dos2unix 
           pkgs.devenv
+          pkgs.ripgrep
       
           # Fun 
           pkgs.newsboat # RSS reader
@@ -41,7 +52,7 @@
           # pkgs.nixFlakes # Flakes (remember to update ~/.config/nix/nix.conf) # https://yuanwang.ca/posts/getting-started-with-flakes.html
           # jetbrains.idea-community # idea-community 
         ];
-
+        
         
         # This starts zsh.
         #shellHook = ''
