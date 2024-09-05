@@ -10,7 +10,6 @@
       inherit pkgs nixvim;
       nvim = nixvim.legacyPackages.x86_64-linux.makeNixvim {
         plugins.lsp.enable = true;
-        plugins.lazyvim.enable = true;
       };
     in
     {
