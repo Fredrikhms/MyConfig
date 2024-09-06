@@ -5,12 +5,12 @@
   outputs = { self, nixpkgs, nixvim }:
     let
       pkgs = import nixpkgs { system = "x86_64-linux"; };
-      nvim = nixvim.legacyPackages.x86_64-linux.makeNixvim {
-        plugins.lsp.enable = true;
-      };
+      #nvim = nixvim.legacyPackages.x86_64-linux.makeNixvim {
+      #  plugins.lsp.enable = true;
+      #};
     in
     {
-      systemPackages = [ nvim ];
+      # systemPackages = [ nvim ];
       packages.x86_64-linux.default = pkgs.mkShell {
         packages = [
           #Shells  
@@ -34,7 +34,8 @@
           pkgs.git
           pkgs.helix
           pkgs.nano # Editor
-          nvim
+          #nvim
+
           pkgs.nil # Nix grammar
           pkgs.yq # Json query
           pkgs.jq # YAML query
@@ -70,7 +71,7 @@
             starship init fish | source
             #zoxide init fish | source
             set -gx EDITOR "hx"
-            tmux set mouse on
+            # tmux set mouse on  # Need to be set after tmux is started...
           " && exit
         '';
 
