@@ -44,16 +44,19 @@
   };
 
   # Add stuff for your user as you see fit:
+  home.packages = with pkgs; [ fishPlugins.tide ];
   # programs.neovim.enable = true;
   programs.fish = {
     enable = true;
     interactiveShellInit = '' 
       set fish_greeing # Disable greeting
     '';
-
   };
-  home.packages = with pkgs; [ fishPlugins.z ];
-
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableFishIntegration = true;
+  };
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git = {
