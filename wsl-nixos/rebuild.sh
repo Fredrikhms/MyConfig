@@ -7,9 +7,10 @@
 #sudo nixos-rebuild switch
 
 
-sudo nixos-rebuild switch --flake .
+# sudo nixos-rebuild switch --flake .
 
 
 
 # OR home-manager
-home-manager switch --flake .#nixos@mywslnixos
+# home-manager switch --flake .#nixos@mywslnixos
+home-manager switch --flake .#nixos@nixos
