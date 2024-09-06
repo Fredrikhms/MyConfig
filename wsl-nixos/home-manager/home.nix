@@ -44,17 +44,26 @@
   };
 
   # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [ fishPlugins.tide ];
+  home.packages = with pkgs; [ ];
   # programs.neovim.enable = true;
   programs.fish = {
     enable = true;
     interactiveShellInit = '' 
-      set fish_greeing # Disable greeting
+      set fish_greeting # Disable greeting
     '';
+    plugins = [
+      #{ name = "grc"; src = pkgs.fishPlugins.grc.src; }
+      #{ name = "done"; src = pkgs.fishPlugins.done.src; }
+      #{ name = "tide"; src = pkgs.fishPlugins.tide.src; }
+      #{ name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
+    ];
   };
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+  programs.starship = {
+    enable = true;
   };
   # Enable home-manager and git
   programs.home-manager.enable = true;
