@@ -25,6 +25,7 @@
           #pkgs.direnv pkgs.nix-direnv # https://tonyfinn.com/blog/nix-from-first-principles-flake-edition/nix-8-flakes-and-developer-environments/
           pkgs.any-nix-shell
           pkgs.starship # Nicer shell env
+	  pkgs.chezmoi # Dotfiles handler
 
           # Shell tools
           pkgs.tmux # tmux + TmuxPackagManager  https://www.youtube.com/watch?v=DzNmUNvnB04
