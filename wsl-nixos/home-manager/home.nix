@@ -55,7 +55,6 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-    enableFishIntegration = true;
   };
   # Enable home-manager and git
   programs.home-manager.enable = true;
