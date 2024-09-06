@@ -66,7 +66,7 @@
 
 
         shellHook = ''
-          fish --init-command "
+          fish --no-config --interactive --init-command "
             any-nix-shell fish --info-right | source
             starship init fish | source
             #zoxide init fish | source
