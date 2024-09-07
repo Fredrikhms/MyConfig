@@ -44,6 +44,7 @@
   };
 
   # Add stuff for your user as you see fit:
+  home.packages = with pkgs; [ w3m ];
   # programs.neovim.enable = true;
   programs.fish = {
     enable = true;
