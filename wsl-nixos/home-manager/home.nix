@@ -58,6 +58,23 @@
       #{ name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
     ];
   };
+  programs.tmux = {
+    enable = true; #https://github.com/srid/nixos-config/blob/master/home/tmux.nix
+    shortcut = "a";
+    baseIndex = 1;
+    # Stop tmux+eskace crazynes
+    escapeTime = 0;
+    # Force tmux to use /tmp for socets (WSL2 compat)
+    secureSocket = false;
+    plugins = [
+      pkgs.tmuxPlugins.better-mouse-mode
+      pkgs.tmuxPlugins.sensible
+      pkgs.tmuxPlugins.copycat
+      pkgs.tmuxPlugins.pain-control
+      pkgs.tmuxPlugins.resurrect
+      pkgs.tmuxPlugins.continuum
+    ];
+  };
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
