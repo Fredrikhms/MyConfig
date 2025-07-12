@@ -67,12 +67,34 @@
     # Force tmux to use /tmp for socets (WSL2 compat)
     secureSocket = false;
     plugins = [
+      # must be before continuum edits right status bar
+      {
+        plugin = pkgs.tmuxPlugins.catppuccin;
+        extraConfig = '' 
+          set -g @catppuccin_flavour 'frappe'
+          set -g @catppuccin_window_tabs_enabled on
+          set -g @catppuccin_date_time "%H:%M"
+        '';
+      }
       pkgs.tmuxPlugins.better-mouse-mode
       pkgs.tmuxPlugins.sensible
       pkgs.tmuxPlugins.copycat
       pkgs.tmuxPlugins.pain-control
-      pkgs.tmuxPlugins.resurrect
-      pkgs.tmuxPlugins.continuum
+      {
+        plugin = pkgs.tmuxPlugins.resurrect;
+        extraConfig = ''
+          set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-processes 'ssh psql mysql sqlite3 newsboat nvim'
+        '';
+      }
+      {
+        plugin = pkgs.tmuxPlugins.continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-boot 'on'
+          set -g @continuum-save-interval '10'
+        '';
+      }
     ];
     extraConfig = ''
       # https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colors/
@@ -95,6 +117,14 @@
   };
   programs.starship = {
     enable = true;
+  };
+  programs.newsboat = {
+    enable = true;
+    browser = "w3m";
+    extraConfig = ''
+      cleanup-on-quit no
+      feed-sort-order lastupdated
+    '';
   };
   # Enable home-manager and git
   programs.home-manager.enable = true;
