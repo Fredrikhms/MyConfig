@@ -36,6 +36,9 @@
           pkgs.nano # Editor
           #nvim
 
+          pkgs.nix-search-cli 
+          pkgs.jujutsu
+
           pkgs.nil # Nix grammar
           pkgs.yq # Json query
           pkgs.jq # YAML query
