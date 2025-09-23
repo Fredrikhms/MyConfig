@@ -1,0 +1,6 @@
+FROM nixos/nix
+COPY .newsboat root/.newsboat
+COPY workspace/myconfig root/myconfig
+RUN cd ~
+
+

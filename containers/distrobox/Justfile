@@ -1,0 +1,37 @@
+#!/bin/bash
+#Source: https://hackeryarn.com/post/distrobox/
+
+
+default := "fedora"
+
+
+# Distributions
+distro-ls:
+  ls | grep {{image_prefix}}.{{dockerfile}}
+
+
+# Define a variable for the image name and Dockerfile
+image_prefix := "dev"
+dockerfile := "Dockerfile"
+
+build distro=default:
+  just podman-build {{distro}}
+  just distrobox-build {{distro}}
+
+# Function to build the podman image
+podman-build distro=default:
+  podman build -t {{distro}}{{image_prefix}} -f {{distro}}{{image_prefix}}.{{dockerfile}}
+
+# Function to create a distrobox
+distrobox-build distro=default:
+  distrobox create --image localhost/{{distro}}{{image_prefix}} --name {{distro}}{{image_prefix}}
+
+distrobox-rm distro=default:
+  distrobox rm {{distro}}
+
+# Function to enter the distrobox
+enter distro=default:
+  distrobox enter {{distro}}{{image_prefix}}
+
+assemble distro:
+  distrobox assemble create --file distrobox-{{distro}}.ini
